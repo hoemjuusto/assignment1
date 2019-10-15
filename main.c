@@ -4,7 +4,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <wait.h>
-
+#include "filehandlers.c"
+#include "file_edits.c"
 
 int main(void)
 {
