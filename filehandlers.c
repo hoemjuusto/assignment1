@@ -1,6 +1,6 @@
 //
 // Created by juuso on 15.10.2019.
-////
+//
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -29,9 +29,11 @@ char *read_file(const char *filename)
 
 int write_to_file(const char *filename, char *clean_text)
 {
+    printf("writing a clean file");
     FILE *f = fopen(filename, "w");
     int ret = 1;
     if (!f) {
+        perror("opening the file failed");
         ret = 0;
     }
     if (fprintf(f, "%s", clean_text) < 0) {

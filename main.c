@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <wait.h>
-#include "filehandlers.c"
-#include "file_edits.c"
+#include "filehandlers.h"
+#include "file_edits.h"
 
 int main(void)
 {
@@ -37,7 +37,7 @@ int main(void)
             fd[0]=0;  //empties the
             char *original = read_file(fpath);   //"/home/juuso/CLionProjects/assignment1/alkuperanen.txt"
             char *clean = delete_comments(original);
-            write_to_file("/home/juuso/CLionProjects/assignment1/alkuperanenclean.txt", clean);
+            write_to_file("/home/juuso/CLionProjects/assignment/alkuperanenclean.txt", clean);
         }
         exit(0);
     }
