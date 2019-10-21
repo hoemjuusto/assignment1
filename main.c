@@ -20,7 +20,7 @@ int main(void)
     if (pid > 0) {
         // Only parent process would come here
         char *filepath = malloc(50);
-        printf("filepath (submit with enter): ");
+        printf("<parent> give filepath (submit with enter): ");
         fflush(stdout);
         scanf("%s", filepath);
         fflush(stdout);
@@ -30,15 +30,12 @@ int main(void)
         fflush(stdout);
     } else {
         // Only child process would come here
-        if (fd[0]!=0)  //if parent has outputted filepath
-        {
-            char *fpath = malloc(100);
-            read(fd[0], fpath, 100);
-            fd[0]=0;  //empties the
-            char *original = read_file(fpath);   //"/home/juuso/CLionProjects/assignment1/alkuperanen.txt"
-            char *clean = delete_comments(original);
-            write_to_file("/home/juuso/CLionProjects/assignment/alkuperanenclean.txt", clean);
-        }
+
+        char *fpath = malloc(100);
+        read(fd[0], fpath, 100);  //child doesn't proceed past this until there is something to read
+        char *original = read_file(fpath);   //"/home/juuso/CLionProjects/assignment1/original.txt"
+        char *clean = delete_comments(original);
+        write_to_file("/home/juuso/CLionProjects/assignment/clean.txt", clean);
         exit(0);
     }
     return 0;
