@@ -10,3 +10,5 @@
 int write_to_file(const char *filename, char *clean_text);
 
 char *read_file(const char *filename);
+
+void wlog(const char *fname, const char *logtext);
