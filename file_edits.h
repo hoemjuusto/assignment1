@@ -8,3 +8,5 @@
 #endif //ASSIGNMENT1_FILE_EDITS_H
 
 char *delete_comments(char *input);
+
+char *edit_name(char *filename, char *add);

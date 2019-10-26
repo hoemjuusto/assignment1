@@ -10,6 +10,7 @@ char *read_file(const char *filename)
     FILE *f = fopen(filename, "r");
     if (!f) {
         printf("While opening file \"%s\" for reading, encountered an error: \n", filename);
+        fflush(stdout);
         perror("");
     }
     char *buf = NULL;
@@ -21,9 +22,7 @@ char *read_file(const char *filename)
         n = fread(buf + count, 1, ReadBlock, f);
         count += n;
     } while (n == ReadBlock);
-
     buf[count] = 0;
-
     fclose(f);
     return buf;
 }
@@ -34,6 +33,7 @@ int write_to_file(const char *filename, char *clean_text)
     int ret = 1;
     if (!f) {
         printf("While opening file \"%s\" for writing, encountered an error: \n", filename);
+        fflush(stdout);
         perror("");
         ret = 0;
     }
@@ -45,7 +45,7 @@ int write_to_file(const char *filename, char *clean_text)
 }
 void wlog(const char *fname, const char *logtext){
     FILE *f;
-    f = fopen(fname, "a"); // a+ (create + append) option will allow appending which is useful in a log file
+    f = fopen(fname, "a+"); // a+ (create + append) option will allow appending which is useful in a log file
     if (f == NULL) { printf("While opening log file \"%s\" for writing, encountered an error: \n", fname); perror("");}
     fprintf(f, "%s", logtext);
     fflush(stdout);

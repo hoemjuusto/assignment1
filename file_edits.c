@@ -3,6 +3,7 @@
 //
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 char *delete_comments(char *input)
@@ -36,4 +37,22 @@ char *delete_comments(char *input)
     free(input);
     return clean;
 
+}
+
+char *edit_name(char *filename, char *add){
+    char *original = filename;
+    char *result = malloc(strlen(filename) + strlen(add) + 1);
+    char *ret = result;
+    int i = 0;
+    while(filename[i] != '.' && filename[i] != '\0'){
+        *result = filename[i];
+        result++;
+        *result = '\0';
+        original++;
+        i++;
+    }
+    *result = '_'; result++; *result = '\0';
+    strcat(ret, add);
+    strcat(ret, original);
+    return ret;
 }

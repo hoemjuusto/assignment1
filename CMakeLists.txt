@@ -3,4 +3,4 @@ project(assignment1 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(assignment1 main.c filehandlers.c file_edits.c filehandlers.h file_edits.h)
+add_executable(assignment1 main.c filehandlers.c file_edits.c filehandlers.h file_edits.h signalling.c signalling.h)
