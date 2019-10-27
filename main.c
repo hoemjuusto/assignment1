@@ -4,21 +4,26 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <wait.h>
+#include <sys/wait.h>
+#include <math.h>
 #include "filehandlers.h"
 #include "file_edits.h"
 #include <signal.h>
 #define FNAMESIZE 50
+#define EXITTIME 3
 
 void signalHandler( int signalValue ); /* prototype */
 void  INThandler(int signalValue);
 
 pid_t pid;
+int keepRunning = 1;
 
 int main(void)
 {
     char log[] = "v.log";
     fopen(log, "w");  //opens and erases log file
-    while(1) {
+    signal(SIGINT, SIG_IGN);  //for the child process to ignore normal exit with CTRL + C and exit more gracefully with parent instructions
+    while(keepRunning) {
         int fd[2];  //fd[0] for input, f[1] for output
         pipe(fd);
         pid = fork();  //creation of child-process
@@ -56,44 +61,28 @@ int main(void)
             exit(0);
         }
     }
-    return 0;
 }
-
-void signalHandler( int signalValue )
-{
-    int response;
-
-    printf( "%s%d%s\n%s","\nInterrupt signal ( ", signalValue, " ) received.",
-            "Do you wish to continue ( 1 = yes or 2 = no )? \n" );
-
-    scanf("%d", &response);
-    fflush(stdout);
-    if ( response == 1 ) {
-        signal( SIGINT, signalHandler );
-    }
-    else {
-        signal(SIGINT, INThandler);
-    }
-
-}
-
 
 void  INThandler(int signalValue)
 {
     printf("\nCtrl-C command detected!\n");
-    signal(signalValue, SIG_IGN);
+    keepRunning = 0;
     kill(pid, SIGTERM);
-    sleep(3);
+    sleep(EXITTIME);
+    if(kill(pid, SIGKILL)==-1){
+        printf("Child did not exit in set %d s exit time, so the parent killed it", EXITTIME);
+    }
     int status;
     waitpid(pid, &status, WNOHANG);
-    if(WIFEXITED(status)){
-        printf("child exited normally\n");
-        fflush(stdout);
-    } else{
-        printf("erroneous exit of child\n");
-        fflush(stdout);
-    }
-    kill(pid, SIGKILL);
+    if (WIFEXITED(status))
+        printf("Child exited normally with %d\n", WEXITSTATUS(status));
+
+    if (WIFSIGNALED(status))
+        printf("Child was terminated by signal %d\n", WTERMSIG(status));
+
+    if (WIFSTOPPED(status))
+        printf("Child was stopped by signal %d\n", WSTOPSIG(status));
+
     waitpid(pid, &status, 0);
     exit(0);
 }
