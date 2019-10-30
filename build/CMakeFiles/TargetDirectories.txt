@@ -1,0 +1,3 @@
+/home/juuso/CLionProjects/assignment/build/CMakeFiles/rebuild_cache.dir
+/home/juuso/CLionProjects/assignment/build/CMakeFiles/assignment1.dir
+/home/juuso/CLionProjects/assignment/build/CMakeFiles/edit_cache.dir
