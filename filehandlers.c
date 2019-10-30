@@ -29,6 +29,7 @@ char *read_file(const char *filename)
 
 int write_to_file(const char *filename, char *clean_text)
 {
+    printf("writing to a file %s\n", filename);
     FILE *f = fopen(filename, "w");
     int ret = 1;
     if (!f) {
@@ -43,10 +44,8 @@ int write_to_file(const char *filename, char *clean_text)
     fclose(f);
     return ret;
 }
-void wlog(const char *fname, const char *logtext){
-    FILE *f;
-    f = fopen(fname, "a+"); // a+ (create + append) option will allow appending which is useful in a log file
-    if (f == NULL) { printf("While opening log file \"%s\" for writing, encountered an error: \n", fname); perror("");}
-    fprintf(f, "%s", logtext);
-    fflush(stdout);
+void wlog(FILE *lp, const char *logtext){
+    if (lp == NULL) { printf("While opening log file for writing, encountered an error: \n"); perror("");}
+    fprintf(lp, "%s", logtext);
+    fflush(lp);
 }

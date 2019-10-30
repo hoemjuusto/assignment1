@@ -3,57 +3,54 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <wait.h>
 #include <sys/wait.h>
-#include <math.h>
+#include <signal.h>
 #include "filehandlers.h"
 #include "file_edits.h"
-#include <signal.h>
+#include "child-process.h"
 #define FNAMESIZE 50
 #define EXITTIME 3
+#define MAX_INPUT_FILES 10
 
-void signalHandler( int signalValue ); /* prototype */
-void  INThandler(int signalValue);
+
+/*void  INThandler(int signalValue);
 
 pid_t pid;
 int keepRunning = 1;
 
 int main(void)
 {
+    FILE *lp;
     char log[] = "v.log";
-    fopen(log, "w");  //opens and erases log file
-    signal(SIGINT, SIG_IGN);  //for the child process to ignore normal exit with CTRL + C and exit more gracefully with parent instructions
+    lp = fopen(log, "w");  //opens and erases log file
     while(keepRunning) {
+        signal(SIGINT, SIG_IGN);  //for the child process to ignore normal exit with CTRL + C and exit more gracefully with parent instructions
         int fd[2];  //fd[0] for input, f[1] for output
         pipe(fd);
-        pid = fork();  //creation of child-process
-        if (pid == -1) {
-            perror("<parent> Fork failed\n");
-            exit(1);
-        }
+        create_child(pid, fd, FNAMESIZE, lp);
         if (pid > 0) {
             // Only parent process would come here
             signal(SIGINT, INThandler);
             close(fd[0]);  //closes the input of the pipe for parent
             char filepath[FNAMESIZE];
-            wlog(log, "<parent> Asking filepath from user\n");
-            printf("<parent> Give filepath (submit with enter): ");
+            wlog(lp, "<parent> Asking filepath from user\n");
+            printf("<parent> Give filepath(s) (submit with enter): ");
             fflush(stdout);
             scanf("%s", filepath);
             fflush(stdout);
-            wlog(log, "<parent> Outputting filepath through pipe to child\n");
+            wlog(lp, "<parent> Outputting filepath through pipe to child\n");
             write(fd[1], filepath, FNAMESIZE);
             close(fd[1]);
             wait(NULL);  //Waits until child is done and terminated
         } else {
             // Only child process would come here
             close(fd[1]); //closes the output of the pipe for child
-            wlog(log, "<child> I'm alive\n");
+            wlog(lp, "<child> I'm alive\n");
             char filepath[FNAMESIZE];
             read(fd[0], filepath, FNAMESIZE);  //child doesn't proceed past this until there is something to read
             close(fd[0]);
             printf("<child> Got a filepath %s from parent\n", filepath);
-            wlog(log, "<child> Received filepath through pipe\n");
+            wlog(lp, "<child> Received filepath through pipe\n");
             char *original = read_file(filepath);
             char *clean = delete_comments(original);
             char add[] = "clean";
@@ -86,3 +83,12 @@ void  INThandler(int signalValue)
     waitpid(pid, &status, 0);
     exit(0);
 }
+
+char **separate_filenames(char *input){
+    char *fname = malloc(FNAMESIZE*8);
+    const char *delim = "_";
+    fname = strtok(input, delim);
+    while(fname) {
+        fname = strtok(input, delim);
+    }
+}*/

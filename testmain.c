@@ -7,7 +7,6 @@
 #include <signal.h>
 #include "filehandlers.h"
 #include "file_edits.h"
-#include "child-process.h"
 #define FNAMESIZE 50
 #define EXITTIME 3
 #define MAX_INPUT 50

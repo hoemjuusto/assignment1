@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#define BUFFER_SIZE 150
 
 
 char *delete_comments(char *input)
@@ -37,6 +38,42 @@ char *delete_comments(char *input)
     free(input);
     return clean;
 
+}
+
+int isEmpty(const char *str)
+{
+    char ch;
+
+    do
+    {
+        ch = *(str++);
+
+        // Check non whitespace character
+        if(ch != ' ' && ch != '\t' && ch != '\n' && ch != '\r' && ch != '\0')
+            return 0;
+
+    } while (ch != '\0');
+
+    return 1;
+}
+
+
+void removeEmptyLines(char *src)
+{
+    char buffer[BUFFER_SIZE];
+    char ret[strlen(src)];
+    for(int i = 0; i < strlen(src); i++){
+        if(src[i] == '\n'){
+            if(!isEmpty(buffer)){
+                strcat(ret, buffer);
+                strncat(ret, "\n", 1);
+            }
+            strcpy(buffer, "");
+        }else{
+            strncat(buffer, &src[i], 1);
+        }
+    }
+    strcpy(src, ret);
 }
 
 char *edit_name(char *filename, char *add){

@@ -9,4 +9,6 @@
 
 char *delete_comments(char *input);
 
+void removeEmptyLines(char *src);
+
 char *edit_name(char *filename, char *add);
