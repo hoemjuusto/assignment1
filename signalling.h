@@ -1,8 +1,0 @@
-//
-// Created by juuso on 24.10.2019.
-//
-
-#ifndef ASSIGNMENT1_SIGNALLING_H
-#define ASSIGNMENT1_SIGNALLING_H
-
-#endif //ASSIGNMENT1_SIGNALLING_H

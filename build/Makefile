@@ -123,32 +123,32 @@ assignment1/fast:
 	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/build
 .PHONY : assignment1/fast
 
-child-process.o: child-process.c.o
+clean-process.o: clean-process.c.o
 
-.PHONY : child-process.o
+.PHONY : clean-process.o
 
 # target to build an object file
-child-process.c.o:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/child-process.c.o
-.PHONY : child-process.c.o
+clean-process.c.o:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/clean-process.c.o
+.PHONY : clean-process.c.o
 
-child-process.i: child-process.c.i
+clean-process.i: clean-process.c.i
 
-.PHONY : child-process.i
+.PHONY : clean-process.i
 
 # target to preprocess a source file
-child-process.c.i:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/child-process.c.i
-.PHONY : child-process.c.i
+clean-process.c.i:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/clean-process.c.i
+.PHONY : clean-process.c.i
 
-child-process.s: child-process.c.s
+clean-process.s: clean-process.c.s
 
-.PHONY : child-process.s
+.PHONY : clean-process.s
 
 # target to generate assembly for a file
-child-process.c.s:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/child-process.c.s
-.PHONY : child-process.c.s
+clean-process.c.s:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/clean-process.c.s
+.PHONY : clean-process.c.s
 
 file_edits.o: file_edits.c.o
 
@@ -204,60 +204,6 @@ filehandlers.c.s:
 	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/filehandlers.c.s
 .PHONY : filehandlers.c.s
 
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/main.c.s
-.PHONY : main.c.s
-
-signalling.o: signalling.c.o
-
-.PHONY : signalling.o
-
-# target to build an object file
-signalling.c.o:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/signalling.c.o
-.PHONY : signalling.c.o
-
-signalling.i: signalling.c.i
-
-.PHONY : signalling.i
-
-# target to preprocess a source file
-signalling.c.i:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/signalling.c.i
-.PHONY : signalling.c.i
-
-signalling.s: signalling.c.s
-
-.PHONY : signalling.s
-
-# target to generate assembly for a file
-signalling.c.s:
-	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/signalling.c.s
-.PHONY : signalling.c.s
-
 testmain.o: testmain.c.o
 
 .PHONY : testmain.o
@@ -294,21 +240,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... assignment1"
 	@echo "... edit_cache"
-	@echo "... child-process.o"
-	@echo "... child-process.i"
-	@echo "... child-process.s"
+	@echo "... clean-process.o"
+	@echo "... clean-process.i"
+	@echo "... clean-process.s"
 	@echo "... file_edits.o"
 	@echo "... file_edits.i"
 	@echo "... file_edits.s"
 	@echo "... filehandlers.o"
 	@echo "... filehandlers.i"
 	@echo "... filehandlers.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... signalling.o"
-	@echo "... signalling.i"
-	@echo "... signalling.s"
 	@echo "... testmain.o"
 	@echo "... testmain.i"
 	@echo "... testmain.s"

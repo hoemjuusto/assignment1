@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/assignment1.dir/child-process.c.o"
+  "CMakeFiles/assignment1.dir/clean-process.c.o"
   "CMakeFiles/assignment1.dir/file_edits.c.o"
   "CMakeFiles/assignment1.dir/filehandlers.c.o"
-  "CMakeFiles/assignment1.dir/main.c.o"
-  "CMakeFiles/assignment1.dir/signalling.c.o"
   "CMakeFiles/assignment1.dir/testmain.c.o"
   "assignment1"
   "assignment1.pdb"

@@ -4,14 +4,21 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <time.h>
+#define MAXLOG 100
 
+char logbuffer[100];
+
+//THIS FUNCTION IS NOT NEEDED IF MEMORY-MAPPING
 char *read_file(const char *filename)
 {
     FILE *f = fopen(filename, "r");
     if (!f) {
-        printf("While opening file \"%s\" for reading, encountered an error: \n", filename);
-        fflush(stdout);
-        perror("");
+        printf("While opening file \"%s\" for reading, encountered an error: %s\n", filename, strerror(errno));
+        snprintf(logbuffer, MAXLOG, "While opening file \"%s\" for reading, encountered an error: \n", filename);
+        perror(logbuffer);
+        return NULL;
     }
     char *buf = NULL;
     unsigned int count = 0;
@@ -33,9 +40,9 @@ int write_to_file(const char *filename, char *clean_text)
     FILE *f = fopen(filename, "w");
     int ret = 1;
     if (!f) {
-        printf("While opening file \"%s\" for writing, encountered an error: \n", filename);
-        fflush(stdout);
-        perror("");
+        printf("While opening file \"%s\" for writing, encountered an error: %s\n", filename, strerror(errno));
+        snprintf(logbuffer, MAXLOG, "While opening file \"%s\" for writing, encountered an error: \n", filename);
+        perror(logbuffer);
         ret = 0;
     }
     if (fprintf(f, "%s", clean_text) < 0) {
@@ -45,7 +52,13 @@ int write_to_file(const char *filename, char *clean_text)
     return ret;
 }
 void wlog(FILE *lp, const char *logtext){
-    if (lp == NULL) { printf("While opening log file for writing, encountered an error: \n"); perror("");}
-    fprintf(lp, "%s", logtext);
+    char buff[20];
+    struct tm *sTm;
+
+    time_t now = time (0);
+    sTm = gmtime (&now);
+
+    strftime (buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
+    fprintf(lp, "%s %s", buff, logtext);
     fflush(lp);
 }

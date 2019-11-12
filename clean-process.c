@@ -8,6 +8,9 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 #include "filehandlers.h"
 #include "file_edits.h"
 
@@ -38,20 +41,43 @@ int clean(char *fname, size_t FNAMESIZE, pid_t *pid, FILE *lp, size_t LOGMSGESIZ
         snprintf(logbuffer, LOGMSGESIZE, "<child> Got a filepath %s from parent\n", filepath);
         wlog(lp, logbuffer);
 
-        char *original = read_file(filepath);
-        if(original==NULL){exit(0);}
-        char *clean = delete_comments(original);
-        removeEmptyLines(clean);
+        //MEMORY-MAPPING, O_RDONLY, S_IRUSR | S_IWUSR : open for read only,
+        int f = open(filepath, O_RDONLY, S_IRUSR | S_IWUSR);
+        struct stat sb;
+
+        if(fstat(f, &sb) == -1){
+            perror("While doing memory mapping couldn't get the file size.\n");
+        }
+        printf("file size is %ld\n", sb.st_size);
+
+        //PROT_READ ONLY GIVES US PERMISSION TO READ, AS IT SHOULD BE
+        char *file_in_memory = mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, f, 0);
+        close(f); //file pointer can be closed immediately after mapping
+
+        if(file_in_memory==MAP_FAILED)
+        {
+            printf("memory mapping failed\n ");
+        }
+        char *temp = delete_comments(file_in_memory);
+        char *clean = removeEmptyLines(temp);
+        //ADDING .CLEAN EXTENSION
         char add[] = "clean";
         char *clean_filename = edit_name(filepath, add);
-        if(write_to_file(clean_filename, clean)==0){
-            free(clean_filename); exit(0);
+        //WRITING THE CLEAN FILE
+        if(write_to_file(clean_filename, clean) != 0){
+            printf("Writing to file failed\n");
         }
         //logging
         snprintf(logbuffer, LOGMSGESIZE, "<child> Managed to write a clean file to %s\n", clean_filename);
         wlog(lp, logbuffer);
 
         free(clean_filename);
+        //UNMAPPING THE FILE IN MEMORY
+        if ( file_in_memory != MAP_FAILED ) {
+            if ( munmap( file_in_memory, sb.st_size )  == -1) {
+                perror("Munmap failed with error: ");
+            }
+        }
         wlog(lp, "<child> Exiting\n");
         exit(0);
     }else if(*pid > 0) {
@@ -67,7 +93,8 @@ int clean(char *fname, size_t FNAMESIZE, pid_t *pid, FILE *lp, size_t LOGMSGESIZ
         wlog(lp, "<parent> Outputting filepath through pipe to child\n");
         if(write(fd[1], fname, FNAMESIZE) < 0){ perror("<parent> writing to pipe failed"); return 0;}
         close(fd[1]);
-        wait(pid);  //Waits until child is done and terminated
+        wait(NULL);  //Waits until child is done and terminated
     }
     return 1;
 }
+

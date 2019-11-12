@@ -7,15 +7,16 @@
 #include <signal.h>
 #include "filehandlers.h"
 #include "file_edits.h"
+#include "clean-process.h"
 #define FNAMESIZE 50
 #define EXITTIME 3
-#define MAX_INPUT 50
-#define MAX_LOG 100
+#define LOGMSGESIZE 100
 
 
 void  INThandler(int signalValue); /*prototype signal handler, implementation in the end*/
+void welcome_msg();
 
-pid_t pid;
+int pid = 0;
 int keepRunning = 1;
 FILE *lp;  //log-file pointer
 char logbuffer[100];
@@ -23,65 +24,25 @@ char logbuffer[100];
 int main(void)
 {
     signal(SIGINT, INThandler);
+    welcome_msg();
     char log[] = "v.log";
     lp = fopen(log, "w");  //opens and erases log file
+    if (lp == NULL) { printf("While opening log file for writing, encountered an error: \n"); perror("");}
+    dup2(fileno(lp), STDERR_FILENO);  //directs error messages to log file
     while(keepRunning) {
-        char *input = malloc(MAX_INPUT*8);
+        char *input = calloc(MAX_INPUT+1, 8);
         wlog(lp, "<parent> Asking filepath(s) from user\n");
-        printf("<parent> Give filepath(s) (submit with enter):\n");
+        printf("<parent> Give filepath(s) (submit with enter, q to quit):\n");
         fgets(input, MAX_INPUT, stdin);
         char *fname;
         char delim[] = "\n ";
         fname = strtok(input, delim);
+        if(strcmp(fname,"q") == 0){
+            printf("Exiting\n");
+            exit(0);
+        }
         while(fname != NULL) {
-            //logging
-            snprintf(logbuffer, MAX_LOG, "Processing given file with name: %s\n", fname);
-            wlog(lp, logbuffer);
-
-            int fd[2];  //fd[0] for input, f[1] for output
-            pipe(fd);
-            pid = fork();
-            if (pid == -1) {
-                perror("<parent> Fork failed\n");
-                exit(1);
-            }
-            if(pid == 0) {
-                //only child would enter here
-                signal(SIGINT, SIG_IGN);  //ignore CTRL + C as child and follow instructions from parent
-                close(fd[1]); //closes the output of the pipe for child
-                char filepath[FNAMESIZE];
-                read(fd[0], filepath, FNAMESIZE);  //child doesn't proceed past this until there is something to read
-                close(fd[0]);
-                //logging
-                snprintf(logbuffer, MAX_LOG, "<child> Got a filepath %s from parent\n", filepath);
-                wlog(lp, logbuffer);
-
-                char *original = read_file(filepath);
-                char *clean = delete_comments(original);
-                removeEmptyLines(clean);
-                char add[] = "clean";
-                char *clean_filename = edit_name(filepath, add);
-                write_to_file(clean_filename, clean);
-                //logging
-                snprintf(logbuffer, MAX_LOG, "<child> Managed to write a clean file to %s\n", clean_filename);
-                wlog(lp, logbuffer);
-
-                free(clean_filename);
-                exit(0);
-            }else if(pid > 0) {
-                //logging
-                wlog(lp, "Child got created\n"); //logging
-                snprintf(logbuffer, MAX_LOG, "Child pid is: %d\n", pid);
-                wlog(lp, logbuffer);
-                snprintf(logbuffer, MAX_LOG, "Parent pid is: %d\n", getppid());
-                wlog(lp, logbuffer);
-
-                close(fd[0]);  //closes the input of the pipe for parent
-                wlog(lp, "<parent> Outputting filepath through pipe to child\n");
-                write(fd[1], fname, FNAMESIZE);
-                close(fd[1]);
-                wait(NULL);  //Waits until child is done and terminated
-            }
+            clean(fname, FNAMESIZE, &pid, lp, LOGMSGESIZE);
             //moves to next filename
             fname = strtok(NULL, delim);
         }
@@ -94,7 +55,7 @@ int main(void)
 
 void  INThandler(int signalValue)
 {
-    keepRunning = 0;
+    //keepRunning = 0;
     printf("\nCtrl-C command detected!\n");
     wlog(lp, "Ctrl-C command detected!\n");
     kill(pid, SIGTERM);
@@ -103,21 +64,31 @@ void  INThandler(int signalValue)
     waitpid(pid, &status, WNOHANG);
     if (WIFEXITED(status)) {
         printf("Child exited normally with signal %d\n", WEXITSTATUS(status));
-        snprintf(logbuffer, MAX_LOG, "Child exited normally with signal %d\n", WEXITSTATUS(status));
+        snprintf(logbuffer, LOGMSGESIZE, "Child exited normally with signal %d\n", WEXITSTATUS(status));
         wlog(lp, logbuffer);
     }
     if (WIFSIGNALED(status)) {
         printf("Child was terminated by signal %d\n", WTERMSIG(status));
-        snprintf(logbuffer, MAX_LOG, "Child was terminated by signal %d\n", WTERMSIG(status));
+        snprintf(logbuffer, LOGMSGESIZE, "Child was terminated by signal %d\n", WTERMSIG(status));
         wlog(lp, logbuffer);
     }
     if (WIFSTOPPED(status)) {
         printf("Child was stopped by signal %d\n", WSTOPSIG(status));
-        snprintf(logbuffer, MAX_LOG, "Child was stopped by signal %d\n", WSTOPSIG(status));
+        snprintf(logbuffer, LOGMSGESIZE, "Child was stopped by signal %d\n", WSTOPSIG(status));
         wlog(lp, logbuffer);
     }
     kill(pid, SIGKILL);
     waitpid(pid, &status, 0);
+    wlog(lp, "<parent> Exiting\n");
+    printf("Exiting\n");
     exit(0);
+}
+
+void welcome_msg(){
+    printf("#####################WELCOME TO CLEANF-EDITOR!#############################\n"
+           "SUBMIT BELOW THE FILEPATHS TO FILES YOU WANT TO GET CLEANED OF ANY COMMENTS\n"
+           "AND EMPTY LINES. LOG-FILE IS NAMED V.LOG AND SHOULD BE FOUND ON THE SAME\n"
+           "PLACE AS THE SOURCE CODE. IT CONTAINS RUNTIME INFO AND POSSIBLE ERRORS.\n"
+           "YOU CAN EXIT BY CTRL + c, OR BY TYPING q\n\n");
 }
 

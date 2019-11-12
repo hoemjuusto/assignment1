@@ -57,22 +57,9 @@ include CMakeFiles/assignment1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/assignment1.dir/flags.make
 
-CMakeFiles/assignment1.dir/main.c.o: CMakeFiles/assignment1.dir/flags.make
-CMakeFiles/assignment1.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assignment1.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/main.c.o   -c /home/juuso/CLionProjects/assignment/main.c
-
-CMakeFiles/assignment1.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/assignment/main.c > CMakeFiles/assignment1.dir/main.c.i
-
-CMakeFiles/assignment1.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/main.c -o CMakeFiles/assignment1.dir/main.c.s
-
 CMakeFiles/assignment1.dir/filehandlers.c.o: CMakeFiles/assignment1.dir/flags.make
 CMakeFiles/assignment1.dir/filehandlers.c.o: ../filehandlers.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/assignment1.dir/filehandlers.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/assignment1.dir/filehandlers.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/filehandlers.c.o   -c /home/juuso/CLionProjects/assignment/filehandlers.c
 
 CMakeFiles/assignment1.dir/filehandlers.c.i: cmake_force
@@ -85,7 +72,7 @@ CMakeFiles/assignment1.dir/filehandlers.c.s: cmake_force
 
 CMakeFiles/assignment1.dir/file_edits.c.o: CMakeFiles/assignment1.dir/flags.make
 CMakeFiles/assignment1.dir/file_edits.c.o: ../file_edits.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/assignment1.dir/file_edits.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/assignment1.dir/file_edits.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/file_edits.c.o   -c /home/juuso/CLionProjects/assignment/file_edits.c
 
 CMakeFiles/assignment1.dir/file_edits.c.i: cmake_force
@@ -96,35 +83,9 @@ CMakeFiles/assignment1.dir/file_edits.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/file_edits.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/file_edits.c -o CMakeFiles/assignment1.dir/file_edits.c.s
 
-CMakeFiles/assignment1.dir/signalling.c.o: CMakeFiles/assignment1.dir/flags.make
-CMakeFiles/assignment1.dir/signalling.c.o: ../signalling.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/assignment1.dir/signalling.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/signalling.c.o   -c /home/juuso/CLionProjects/assignment/signalling.c
-
-CMakeFiles/assignment1.dir/signalling.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/signalling.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/assignment/signalling.c > CMakeFiles/assignment1.dir/signalling.c.i
-
-CMakeFiles/assignment1.dir/signalling.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/signalling.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/signalling.c -o CMakeFiles/assignment1.dir/signalling.c.s
-
-CMakeFiles/assignment1.dir/child-process.c.o: CMakeFiles/assignment1.dir/flags.make
-CMakeFiles/assignment1.dir/child-process.c.o: ../child-process.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/assignment1.dir/child-process.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/child-process.c.o   -c /home/juuso/CLionProjects/assignment/child-process.c
-
-CMakeFiles/assignment1.dir/child-process.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/child-process.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/assignment/child-process.c > CMakeFiles/assignment1.dir/child-process.c.i
-
-CMakeFiles/assignment1.dir/child-process.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/child-process.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/child-process.c -o CMakeFiles/assignment1.dir/child-process.c.s
-
 CMakeFiles/assignment1.dir/testmain.c.o: CMakeFiles/assignment1.dir/flags.make
 CMakeFiles/assignment1.dir/testmain.c.o: ../testmain.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/assignment1.dir/testmain.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/assignment1.dir/testmain.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/testmain.c.o   -c /home/juuso/CLionProjects/assignment/testmain.c
 
 CMakeFiles/assignment1.dir/testmain.c.i: cmake_force
@@ -135,27 +96,36 @@ CMakeFiles/assignment1.dir/testmain.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/testmain.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/testmain.c -o CMakeFiles/assignment1.dir/testmain.c.s
 
+CMakeFiles/assignment1.dir/clean-process.c.o: CMakeFiles/assignment1.dir/flags.make
+CMakeFiles/assignment1.dir/clean-process.c.o: ../clean-process.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/assignment1.dir/clean-process.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/clean-process.c.o   -c /home/juuso/CLionProjects/assignment/clean-process.c
+
+CMakeFiles/assignment1.dir/clean-process.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/clean-process.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/juuso/CLionProjects/assignment/clean-process.c > CMakeFiles/assignment1.dir/clean-process.c.i
+
+CMakeFiles/assignment1.dir/clean-process.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/clean-process.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/juuso/CLionProjects/assignment/clean-process.c -o CMakeFiles/assignment1.dir/clean-process.c.s
+
 # Object files for target assignment1
 assignment1_OBJECTS = \
-"CMakeFiles/assignment1.dir/main.c.o" \
 "CMakeFiles/assignment1.dir/filehandlers.c.o" \
 "CMakeFiles/assignment1.dir/file_edits.c.o" \
-"CMakeFiles/assignment1.dir/signalling.c.o" \
-"CMakeFiles/assignment1.dir/child-process.c.o" \
-"CMakeFiles/assignment1.dir/testmain.c.o"
+"CMakeFiles/assignment1.dir/testmain.c.o" \
+"CMakeFiles/assignment1.dir/clean-process.c.o"
 
 # External object files for target assignment1
 assignment1_EXTERNAL_OBJECTS =
 
-assignment1: CMakeFiles/assignment1.dir/main.c.o
 assignment1: CMakeFiles/assignment1.dir/filehandlers.c.o
 assignment1: CMakeFiles/assignment1.dir/file_edits.c.o
-assignment1: CMakeFiles/assignment1.dir/signalling.c.o
-assignment1: CMakeFiles/assignment1.dir/child-process.c.o
 assignment1: CMakeFiles/assignment1.dir/testmain.c.o
+assignment1: CMakeFiles/assignment1.dir/clean-process.c.o
 assignment1: CMakeFiles/assignment1.dir/build.make
 assignment1: CMakeFiles/assignment1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable assignment1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/juuso/CLionProjects/assignment/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable assignment1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/assignment1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

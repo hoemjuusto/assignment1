@@ -6,33 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/juuso/CLionProjects/assignment/child-process.h
-sys/types.h
--
-
-/home/juuso/CLionProjects/assignment/file_edits.h
-
-/home/juuso/CLionProjects/assignment/filehandlers.h
-
-/home/juuso/CLionProjects/assignment/testmain.c
-stdio.h
--
+/home/juuso/CLionProjects/assignment/file_edits.c
 string.h
 -
 stdlib.h
 -
-sys/types.h
+stdio.h
 -
-unistd.h
--
-sys/wait.h
--
-signal.h
--
-filehandlers.h
-/home/juuso/CLionProjects/assignment/filehandlers.h
-file_edits.h
-/home/juuso/CLionProjects/assignment/file_edits.h
-child-process.h
-/home/juuso/CLionProjects/assignment/child-process.h
 

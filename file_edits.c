@@ -34,13 +34,12 @@ char *delete_comments(char *input)
             cleanindex += 1;
         }
     }
-    clean[cleanindex] = 0;
-    free(input);
+    clean[cleanindex] = '\0';
     return clean;
 
 }
 
-int isEmpty(const char *str)
+static int isEmpty(const char *str)
 {
     char ch;
 
@@ -58,10 +57,10 @@ int isEmpty(const char *str)
 }
 
 
-void removeEmptyLines(char *src)
+char *removeEmptyLines(char *src)
 {
-    char buffer[BUFFER_SIZE];
-    char ret[strlen(src)];
+    char *buffer = calloc(BUFFER_SIZE + 1, 8);
+    char *ret = calloc(strlen(src) + 1, 8);
     for(int i = 0; i < strlen(src); i++){
         if(src[i] == '\n'){
             if(!isEmpty(buffer)){
@@ -73,12 +72,13 @@ void removeEmptyLines(char *src)
             strncat(buffer, &src[i], 1);
         }
     }
-    strcpy(src, ret);
+    free(buffer);
+    return ret;
 }
 
 char *edit_name(char *filename, char *add){
     char *original = filename;
-    char *result = malloc(strlen(filename) + strlen(add) + 1);
+    char *result = malloc(strlen(filename) + strlen(add) + 2);
     char *ret = result;
     int i = 0;
     while(filename[i] != '.' && filename[i] != '\0'){
@@ -88,7 +88,7 @@ char *edit_name(char *filename, char *add){
         original++;
         i++;
     }
-    *result = '_'; result++; *result = '\0';
+    *result = '.'; result++; *result = '\0';
     strcat(ret, add);
     strcat(ret, original);
     return ret;
